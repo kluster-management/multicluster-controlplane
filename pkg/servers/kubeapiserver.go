@@ -96,6 +96,9 @@ func createKubeAPIServerConfig(options options.ServerRunOptions) (
 			APIServerServiceIP:   options.APIServerServiceIP,
 			APIServerServicePort: 443,
 
+			ServiceIPRange:          options.PrimaryServiceClusterIPRange,
+			SecondaryServiceIPRange: options.SecondaryServiceClusterIPRange,
+
 			EndpointReconcilerType: reconcilers.Type(options.EndpointReconcilerType),
 			MasterCount:            1,
 
@@ -329,6 +332,8 @@ func BuildPriorityAndFairness(serverRunOptions *genericoptions.ServerRunOptions,
 }
 
 func buildServiceResolver(enabledAggregatorRouting bool, hostname string, informer clientgoinformers.SharedInformerFactory) webhook.ServiceResolver {
+	fmt.Println("******************** enabledAggregatorRouting =", enabledAggregatorRouting)
+
 	var serviceResolver webhook.ServiceResolver
 	if enabledAggregatorRouting {
 		serviceResolver = aggregatorapiserver.NewEndpointServiceResolver(
