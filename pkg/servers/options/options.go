@@ -231,7 +231,8 @@ func NewServerRunOptions() *ServerRunOptions {
 
 		KubeControllerManagerOptions: kubeControllerManagerOptions,
 
-		ServiceClusterIPRanges: "10.0.0.0/24",
+		ServiceClusterIPRanges:  "10.0.0.0/8",
+		EnableAggregatorRouting: false,
 
 		ControlplaneConfigDir: "/controlplane_config",
 
