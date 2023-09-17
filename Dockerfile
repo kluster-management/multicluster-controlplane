@@ -14,7 +14,7 @@ RUN GOOS=${OS} \
     make build
 
 
-FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
+FROM debian
 ENV USER_UID=10001
 
 COPY --from=builder /go/src/open-cluster-management.io/multicluster-controlplane/bin/multicluster-controlplane /
